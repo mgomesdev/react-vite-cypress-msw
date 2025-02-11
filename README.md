@@ -1,1 +1,1 @@
-# Testes E2E utilizando react + cypress + msw
+# Testes E2E utilizando react, vite, cypress, msw
