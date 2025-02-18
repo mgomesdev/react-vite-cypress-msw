@@ -23,4 +23,32 @@ function App() {
    );
 }
 
+export const Stepper = ({ counter, onChange }: { counter: number; onChange?: (count: number) => void }) => {
+   const [count, setCount] = useState(counter);
+
+   const handleIncrement = () => setCount((prevState) => prevState + 1);
+
+   const handleDecrement = () => setCount((prevState) => prevState - 1);
+
+   return (
+      <>
+         <button
+            data-cy="increment"
+            onClick={() => {
+               handleIncrement();
+               onChange && onChange(1);
+            }}
+         >
+            Increment
+         </button>
+
+         <button data-cy="decrement" onClick={handleDecrement}>
+            Decrement
+         </button>
+
+         <span data-cy="count">{count}</span>
+      </>
+   );
+};
+
 export default App;
