@@ -2,7 +2,7 @@
    "name": "react-cypress-msw",
    "private": true,
    "version": "0.0.0",
-   "type": "commonjs",
+   "type": "module",
    "scripts": {
       "dev": "vite",
       "build": "tsc -b && vite build",
@@ -11,8 +11,10 @@
       "cy": "cypress open"
    },
    "dependencies": {
+      "@tailwindcss/vite": "^4.0.7",
       "react": "^19.0.0",
-      "react-dom": "^19.0.0"
+      "react-dom": "^19.0.0",
+      "tailwindcss": "^4.0.7"
    },
    "devDependencies": {
       "@eslint/js": "^9.19.0",
