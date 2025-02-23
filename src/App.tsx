@@ -1,8 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+
+const getUser = async () => {
+   const req = await fetch("https://example.com/user");
+   const resp = await req.json();
+   return resp;
+};
 
 function App() {
    const [logged, setLogged] = useState(false);
+   const [user, setUser] = useState<{ id: string; firstName: string; lastName: string } | null>(null);
 
    const handleLogin: React.FormEventHandler<HTMLFormElement> = (e) => {
       e.preventDefault();
@@ -10,8 +17,23 @@ function App() {
       setLogged(true);
    };
 
+   useEffect(() => {
+      const getUserData = async () => {
+         const result = await getUser();
+         setUser(result);
+      };
+
+      getUserData();
+   }, []);
    return (
       <div>
+         <h1>Dados do usuario</h1>
+         <ul>
+            <li>ID: {user?.id}</li>
+            <li>FirstName: {user?.firstName}</li>
+            <li>LastName: {user?.lastName}</li>
+         </ul>
+
          <form onSubmit={handleLogin}>
             <input type="text" name="email" />
             <input type="password" name="password" />
@@ -23,7 +45,7 @@ function App() {
    );
 }
 
-export const Stepper = ({ counter, onChange }: { counter: number; onChange?: (count: number) => void }) => {
+export const Stepper = ({ counter }: { counter: number }) => {
    const [count, setCount] = useState(counter);
 
    const handleIncrement = () => setCount((prevState) => prevState + 1);
@@ -36,7 +58,6 @@ export const Stepper = ({ counter, onChange }: { counter: number; onChange?: (co
             data-cy="increment"
             onClick={() => {
                handleIncrement();
-               onChange && onChange(1);
             }}
          >
             Increment

@@ -1,5 +1,6 @@
 import { mount } from "cypress/react";
 import "./commands";
+import "./msw";
 
 declare global {
    namespace Cypress {
